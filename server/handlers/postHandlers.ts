@@ -1,28 +1,24 @@
-import { RequestHandler } from "express";
 import { db } from "../datastore";
-import { Next } from "react-bootstrap/esm/PageItem";
 import { ExpressHandler, Post } from "../types";
 import crypto from 'crypto'
+import { createPostReq, createPostRes, listPostsRequest, listPostsResponse } from "../api";
 
 
 
-export const listPostsHandler: ExpressHandler<{}, {}> = (req, res, next) => {
-  try {
-    res.status(200).send({ posts: db.listPosts() })
+export const listPostsHandler: ExpressHandler<listPostsRequest, listPostsResponse> = (req, res, next) => {
 
-  } catch (e) {
-    next()
-  }
+  db.listPosts().then(posts => {
+    res.status(200).send({ posts: posts })
+  })
+    .catch(error => {
+      console.error('Error fetching posts:', error);
+    });
 }
 
 
 
 
-type createPostReq = Pick<Post, 'title' | 'url' | 'userId'>
-type createPostRes = {}
-
-
-export const createPostHandler: ExpressHandler<createPostReq, createPostRes> = (req, res, next) => {
+export const createPostHandler: ExpressHandler<createPostReq, createPostRes> = async (req, res, next) => {
 
 
 
@@ -35,7 +31,8 @@ export const createPostHandler: ExpressHandler<createPostReq, createPostRes> = (
     url: req.body.url,
     userId: req.body.userId,
   }
-  db.creatPost(post);
+
+  await db.createPost(post);
   res.sendStatus(200)
 
 } 

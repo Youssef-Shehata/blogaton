@@ -1,7 +1,7 @@
 import { Datastore } from "..";
 import { User, Post, Comment, Like } from "../../types";
 
-
+// @ts-ignore
 export class inMemoryDatastore implements Datastore {
   private users: User[] = [];
   private comments: Comment[] = [];
@@ -13,38 +13,45 @@ export class inMemoryDatastore implements Datastore {
 
 
 
-  createUser(user: User): void {
-    throw new Error("Method not implemented.");
-  }
-  getUserByUserName(userName: string): User | undefined {
-    throw new Error("Method not implemented.");
-  }
-  getUserById(Id: string): User | undefined {
-    throw new Error("Method not implemented.");
-  }
-  listPosts(): Post[] {
-    return this.posts
-  }
-  creatPost(post: Post): void {
-    this.posts.push(post);
-  }
-  getPostBy(id: string): Post | undefined {
-    throw new Error("Method not implemented.");
-  }
-  deletePost(Id: string): void {
-    throw new Error("Method not implemented.");
-  }
-  createComment(comment: Comment): void {
-    throw new Error("Method not implemented.");
-  }
-  listComments(postId: string): Comment[] {
-    throw new Error("Method not implemented.");
-  }
-  deleteComment(Id: string): void {
-    throw new Error("Method not implemented.");
-  }
-  createLike(like: Like): void {
-    throw new Error("Method not implemented.");
-  }
+  //   createUser(user: User): void {
+  //     this.users.push(user)
+
+  //   }
+  //   getUserByUserName(userName: string): User | undefined {
+  //     return this.users.find((u) => { u.userName === userName })
+
+  //   }
+  //   getUserById(Id: string): User | undefined {
+  //     return this.users.find((u) => { u.id === Id })
+
+  //   }
+  //   listPosts(): Post[] {
+  //     return this.posts
+  //   }
+  //   creatPost(post: Post): void {
+  //     this.posts.push(post);
+  //   }
+  //   getPostBy(id: string): Post | undefined {
+  //     return this.posts.find((p) => { p.id === id })
+  //   }
+  //   deletePost(Id: string): void {
+  //     const idx = this.posts.findIndex(p => p.id === Id)
+  //     if (idx == -1) return
+  //     this.posts.splice(idx, 1)
+  //   }
+  //   createComment(comment: Comment): void {
+  //     this.comments.push(comment);
+  //   }
+  //   listComments(postId: string): Comment[] {
+  //     return this.comments.filter(c => c.postId === postId)
+  //   }
+  //   deleteComment(Id: string): void {
+  //     const idx = this.comments.findIndex(c => c.id === Id)
+  //     if (idx == -1) return
+  //     this.comments.splice(idx, 1)
+  //   }
+  //   createLike(like: Like): void {
+  //     this.likes.push(like)
+  //   }
 }
 
