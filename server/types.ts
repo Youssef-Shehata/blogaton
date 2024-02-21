@@ -33,6 +33,13 @@ export interface Comment {
   postedAt: number;
   liked?: boolean;
 }
+export type jwtToken = {
+  userId: string,
+  userName: string,
+
+}
 
 
-export type ExpressHandler<req, res> = RequestHandler<string, Partial<res>, Partial<req>, any>
+export type withError<T> = T & { error: string }
+
+export type ExpressHandler<req, res> = RequestHandler<string, Partial<withError<res>>, Partial<req>, any>

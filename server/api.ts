@@ -3,7 +3,7 @@ import { Post, Comment, Like, User } from "./types"
 
 //post apis
 export interface listPostsRequest { }
-export interface listPostsResponse { }
+export interface listPostsResponse { posts: Post[] }
 
 export type createPostReq = Pick<Post, 'title' | 'url' | 'userId'>
 export type createPostRes = {}
@@ -17,13 +17,16 @@ export interface getPostResponse {
 // user api 
 
 export type SignUpReq = Pick<User, 'firstName' | 'lastName' | 'userName' | 'email' | 'password'>
-export interface SignUpRes { }
+export interface SignUpRes { token: string }
 
 export interface SignInReq {
   login: string,
   password: string
 }
-export type SignInRes = Pick<User, 'firstName' | 'lastName' | 'userName' | 'email' | 'id'> | string
+export type SignInRes = {
+  user: Pick<User, 'firstName' | 'lastName' | 'userName' | 'email' | 'id'>,
+  token: string
+}
 
 
 
