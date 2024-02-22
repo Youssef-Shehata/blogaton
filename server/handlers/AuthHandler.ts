@@ -38,6 +38,8 @@ export const SignUpHandler: ExpressHandler<SignUpReq, SignUpRes> = async (req, r
   res.status(200).send({ token: token })
 
 }
+
+
 export const SignInHandler: ExpressHandler<SignInReq, SignInRes> = async (req, res, next) => {
   const { login, password } = req.body
   if (!login || !password) {

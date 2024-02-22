@@ -18,6 +18,10 @@ export const authMiddleware: ExpressHandler<{}, {}> = async (req, res, next) => 
 
     }
 
+
+
+    res.locals.userId = user.id
+
     next()
 
   } catch (e) {

@@ -21,6 +21,9 @@ import { authMiddleware } from './middleware/authMiddleware'
     dotenv.config()
     app.use(express.json())
 
+    app.get('/healthZ', (req, res) => {
+      res.status(200).send({ status: 'OK' })
+    })
     app.post('/signup', SignUpHandler)
     app.post('/signIn', SignInHandler)
 
@@ -36,9 +39,9 @@ import { authMiddleware } from './middleware/authMiddleware'
     app.use(errorHandler)
 
 
-
-    app.listen(3000)
-    console.log('connecting on port 3000')
+    let port = process.env.PORT || 3000
+    app.listen(port)
+    console.log(`connecting on port ${port}`)
   }
   catch (e) {
     console.log(e)

@@ -5,7 +5,7 @@ import { Post, Comment, Like, User } from "./types"
 export interface listPostsRequest { }
 export interface listPostsResponse { posts: Post[] }
 
-export type createPostReq = Pick<Post, 'title' | 'url' | 'userId'>
+export type createPostReq = Pick<Post, 'title' | 'url'>
 export type createPostRes = {}
 
 export interface getPostRequest { }
