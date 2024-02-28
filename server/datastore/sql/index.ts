@@ -2,7 +2,7 @@ import sqlite3 from 'sqlite3'
 import { open, Database } from 'sqlite'
 import * as path from 'path'; // Import the 'path' module
 import { Datastore } from '..'
-import { User, Post, Comment, Like } from '../../types'
+import { User, Post, Comment, Like } from '../../../shared/src/types'
 
 export class sqlDataStore implements Datastore {
 

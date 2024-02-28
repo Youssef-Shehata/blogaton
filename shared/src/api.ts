@@ -1,4 +1,3 @@
-import { application } from "express";
 import { Post, Comment, Like, User } from "./types"
 
 //post apis

@@ -1,5 +1,5 @@
 import { Datastore } from "..";
-import { User, Post, Comment, Like } from "../../types";
+import { User, Post, Comment, Like } from "../../../shared/src/types";
 
 // @ts-ignore
 export class inMemoryDatastore implements Datastore {

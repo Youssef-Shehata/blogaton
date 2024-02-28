@@ -21,6 +21,18 @@ import { authMiddleware } from './middleware/authMiddleware'
     dotenv.config()
     app.use(express.json())
 
+
+
+    app.options('*', (req, res) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      res.sendStatus(200); // Respond with HTTP OK status
+    });
+
+
+
+
     app.get('/healthZ', (req, res) => {
       res.status(200).send({ status: 'OK' })
     })

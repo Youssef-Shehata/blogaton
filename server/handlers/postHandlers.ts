@@ -1,7 +1,9 @@
 import { db } from "../datastore";
-import { ExpressHandler, Post } from "../types";
+import { Post } from "../../shared/src/types";
+import { ExpressHandler } from '../types'
+
 import crypto from 'crypto'
-import { createPostReq, createPostRes, listPostsRequest, listPostsResponse } from "../api";
+import { createPostReq, createPostRes, listPostsRequest, listPostsResponse } from "../../shared/src/api";
 
 
 

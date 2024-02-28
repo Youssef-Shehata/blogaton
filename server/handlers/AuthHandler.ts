@@ -1,8 +1,10 @@
 import { number } from "prop-types";
-import { SignInReq, SignInRes, SignUpReq, SignUpRes } from "../api";
+import { SignInReq, SignInRes, SignUpReq, SignUpRes } from "../../shared/src/api";
 import { jwtSign } from "../auth";
 import { db } from "../datastore";
-import { ExpressHandler, User } from "../types";
+import { ExpressHandler } from "../types";
+import { User } from "../../shared";
+
 import crypto from 'crypto'
 
 export const SignUpHandler: ExpressHandler<SignUpReq, SignUpRes> = async (req, res) => {
