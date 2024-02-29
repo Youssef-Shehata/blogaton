@@ -5,6 +5,7 @@ import { initDb } from './datastore'
 import { SignInHandler, SignUpHandler } from './handlers/AuthHandler'
 import dotenv from 'dotenv'
 import { authMiddleware } from './middleware/authMiddleware'
+import { requestLoggerMiddleware } from './middleware/loggerMiddleware'
 
 
 
@@ -21,7 +22,7 @@ import { authMiddleware } from './middleware/authMiddleware'
     dotenv.config()
     app.use(express.json())
 
-
+    app.use(requestLoggerMiddleware)
 
     app.options('*', (req, res) => {
       res.setHeader('Access-Control-Allow-Origin', '*');
@@ -31,7 +32,12 @@ import { authMiddleware } from './middleware/authMiddleware'
     });
 
 
-
+    app.use((req, res, next) => {
+      res.setHeader('Access-Control-Allow-Origin', '*');
+      res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
+      res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+      next();
+    });
 
     app.get('/healthZ', (req, res) => {
       res.status(200).send({ status: 'OK' })
