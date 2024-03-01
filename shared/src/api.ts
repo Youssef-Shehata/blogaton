@@ -41,4 +41,5 @@ export interface createCommentRes { }
 export type createLikeReq = Pick<Like, 'userId' | 'postId'>
 export interface createLikeRes { }
 
-
+export type getLikesReq = Pick<Like, 'postId'>
+export interface getLikesRes { likes: number }

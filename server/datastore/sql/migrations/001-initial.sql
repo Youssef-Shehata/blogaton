@@ -13,5 +13,20 @@ CREATE TABLE posts (
   url      VARCHAR UNIQUE NOT NULL,
   userId   VARCHAR NOT NULL,
   postedAt INTEGER NOT NULL,
+  likes    INTEGER,
+  comments INTEGER
+
   FOREIGN KEY (userId) REFERENCES users (id)
 );
+
+CREATE TABLE likes (
+  userId   VARCHAR NOT NULL ,
+  postId    VARCHAR NOT NULL,
+
+  FOREIGN KEY (userId) REFERENCES users (id),
+  FOREIGN KEY (postId) REFERENCES posts (id)
+  PRIMARY KEY (postId , userId)
+
+);
+
+  

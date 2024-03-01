@@ -16,6 +16,8 @@ export interface Post {
   userId: string;
   postedAt: number;
   liked?: boolean;
+  likes: number;
+  comments: number;
   // score :number;
 }
 

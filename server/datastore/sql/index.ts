@@ -72,13 +72,18 @@ export class sqlDataStore implements Datastore {
 
   }
   async createPost(post: Post): Promise<void> {
-    await this.db.run('INSERT INTO posts (id, title, url, postedAt, userId) VALUES (?,?,?,?,?) ',
-      post.id,
-      post.title,
-      post.url,
-      post.postedAt,
-      post.userId)
-
+    try {
+      await this.db.run('INSERT INTO posts (id, title, url, postedAt, userId , likes , comments) VALUES (?,?,?,?,?,?,?) ',
+        post.id,
+        post.title,
+        post.url,
+        post.postedAt,
+        post.userId,
+        post.likes,
+        post.comments)
+    } catch (e: any) {
+      console.log("error creating post", e?.message)
+    }
 
   }
   getPost(id: string, userId?: string | undefined): Promise<Post | undefined> {
@@ -102,14 +107,49 @@ export class sqlDataStore implements Datastore {
   deleteComment(id: string): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  createLike(like: Like): Promise<void> {
-    throw new Error('Method not implemented.');
+
+
+  async createLike(like: Like): Promise<void> {
+    try {
+      await this.db.run('INSERT INTO likes ( userId , postId) VALUES (?,?) ',
+        like.userId,
+        like.postId
+      )
+
+    } catch (err: any) {
+
+
+      console.log(err)
+
+      return;
+    };
+    try {
+      const row = await this.db.get('SELECT likes FROM posts WHERE id = ?', [like.postId]);
+
+      // Check if a row was returned
+      if (row) {
+        // Initial value of the "likes" column for the specified post ID
+        const initialLikesValue = row.likes;
+        console.log('Initial likes value:', initialLikesValue);
+        const newLikes = initialLikesValue + 1;
+        await this.db.run('UPDATE posts SET likes= ? WHERE id = ?', newLikes, like.postId);
+      } else {
+        console.log('No record found for the specified post ID:', like.postId);
+      }
+    } catch (err: any) {
+      console.error('Error getting likes:', err?.message);
+    }
+
+
   }
   deleteLike(like: Like): Promise<void> {
     throw new Error('Method not implemented.');
   }
-  getLikes(postId: string): Promise<number> {
-    throw new Error('Method not implemented.');
+  async getLikes(postId: string): Promise<number> {
+    const likes = await this.db.get('SELECT likes FROM posts WHERE id = ?', postId);
+    if (!likes) return -1
+    return likes;
+
   }
   exists(like: Like): Promise<boolean> {
     throw new Error('Method not implemented.');

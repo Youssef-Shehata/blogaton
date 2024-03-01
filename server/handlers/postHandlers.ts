@@ -32,9 +32,15 @@ export const createPostHandler: ExpressHandler<createPostReq, createPostRes> = a
     title: req.body.title,
     url: req.body.url,
     userId: userId,
+    likes: 0,
+    comments: 0,
   }
 
-  await db.createPost(post);
+  await db.createPost(post).catch(e => {
+    console.log(e.message)
+    return res.sendStatus(500).json({ error: e.message })
+  }
+  );
   res.sendStatus(200)
 
 } 
