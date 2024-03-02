@@ -1,4 +1,4 @@
-import { User } from "../../shared/src/types";
+import { User } from "../../sharedResources/src/types";
 
 
 export interface UserDao {

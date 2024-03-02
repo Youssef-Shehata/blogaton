@@ -1,4 +1,4 @@
-import { Like } from "../../shared/src/types";
+import { Like } from "../../sharedResources/src/types";
 
 export interface LikeDao {
   createLike(like: Like): Promise<void>;

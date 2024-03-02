@@ -2,7 +2,7 @@ import sqlite3 from 'sqlite3'
 import { open, Database } from 'sqlite'
 import * as path from 'path'; // Import the 'path' module
 import { Datastore } from '..'
-import { User, Post, Comment, Like } from '../../../shared/src/types'
+import { User, Post, Comment, Like } from '../../../sharedResources/src/types'
 
 export class sqlDataStore implements Datastore {
 
@@ -142,8 +142,35 @@ export class sqlDataStore implements Datastore {
 
 
   }
-  deleteLike(like: Like): Promise<void> {
-    throw new Error('Method not implemented.');
+  async deleteLike(like: Like): Promise<void> {
+
+    try {
+      let res = await this.db.run('DELETE FROM likes WHERE userId = ? AND postId = ?', [like.userId, like.postId])
+      console.log(res.changes)
+      if (res.changes == 0) return
+
+    } catch (err: any) {
+      console.log(err.message)
+      return;
+    };
+
+
+    try {
+      const row = await this.db.get('SELECT likes FROM posts WHERE id = ?', [like.postId]);
+
+      // Check if a row was returned
+      if (row) {
+        // Initial value of the "likes" column for the specified post ID
+        const initialLikesValue = row.likes;
+        const newLikes = initialLikesValue - 1;
+        await this.db.run('UPDATE posts SET likes= ? WHERE id = ?', newLikes, like.postId);
+      } else {
+        console.log('No record found for the specified post ID:', like.postId);
+      }
+    } catch (err: any) {
+      console.error('Error getting likes:', err?.message);
+    }
+
   }
   async getLikes(postId: string): Promise<number> {
     const likes = await this.db.get('SELECT likes FROM posts WHERE id = ?', postId);

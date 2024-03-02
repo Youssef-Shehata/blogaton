@@ -43,3 +43,7 @@ export interface createLikeRes { }
 
 export type getLikesReq = Pick<Like, 'postId'>
 export interface getLikesRes { likes: number }
+
+
+export type deleteLikeReq = Like
+export interface deleteLikeRes { }

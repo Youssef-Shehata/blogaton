@@ -6,7 +6,7 @@ import { SignInHandler, SignUpHandler } from './handlers/AuthHandler'
 import dotenv from 'dotenv'
 import { authMiddleware } from './middleware/authMiddleware'
 import { requestLoggerMiddleware } from './middleware/loggerMiddleware'
-import { createLikeHandler, getLikesHandler } from './handlers/likeHandlers'
+import { createLikeHandler, getLikesHandler, deleteLikeHandler } from './handlers/likeHandlers'
 
 
 
@@ -55,6 +55,8 @@ import { createLikeHandler, getLikesHandler } from './handlers/likeHandlers'
 
     app.post('/addlike', createLikeHandler)
     app.get('/likes', getLikesHandler)
+    app.post('/deletelike', deleteLikeHandler)
+
 
 
     app.use(errorHandler)

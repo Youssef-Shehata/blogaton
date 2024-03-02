@@ -1,4 +1,4 @@
-import { Post } from "../../shared/src/types";
+import { Post } from "../../sharedResources/src/types";
 
 export interface PostDao {
   listPosts(userId?: string): Promise<Post[]>;

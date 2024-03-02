@@ -3,7 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^7.1.0",
+    "@blogaton/shared": "file:../shared",
+    "@craco/craco": "^7.0.0-alpha.7",
     "@fortawesome/fontawesome-svg-core": "^6.5.1",
     "@fortawesome/free-solid-svg-icons": "^6.5.1",
     "@fortawesome/react-fontawesome": "^0.2.0",
@@ -11,6 +12,7 @@
     "@types/node": "^16.18.83",
     "@types/react": "^18.2.60",
     "@types/react-dom": "^18.2.19",
+    "axios": "^1.6.7",
     "clsx": "^2.1.0",
     "million": "^3.0.3",
     "react": "^18.2.0",
@@ -43,5 +45,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@craco/craco": "^7.1.0"
   }
 }

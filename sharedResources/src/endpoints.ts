@@ -30,17 +30,17 @@ export const ENDPOINT_CONFIGS: { [key in Endpoints]: EndpointConfig } = {
 
   [Endpoints.listPosts]: { url: 'http://localhost/3000/posts', method: 'get' },
   [Endpoints.creatPost]: { url: 'http://localhost/3000/posts', method: 'post' },
-  [Endpoints.getPost]: { url: 'http://localhost/3000/:id', method: 'get' },
-  [Endpoints.deletePost]: { url: 'http://localhost/:id', method: 'post' },
+  [Endpoints.getPost]: { url: 'http://localhost/3000/:id', method: 'get', auth: true },
+  [Endpoints.deletePost]: { url: 'http://localhost/:id', method: 'post', auth: true },
 
   [Endpoints.listLikes]: { url: 'http://localhost/3000/likes', method: 'get' },
-  [Endpoints.createLike]: { url: 'http://localhost/3000/like', method: 'post' },
-  [Endpoints.deleteLike]: { url: 'http://localhost/3000/:id', method: 'post' },
+  [Endpoints.createLike]: { url: 'http://localhost:4000/addlike', method: 'post' },//add auth
+  [Endpoints.deleteLike]: { url: 'http://localhost:4000/deletelike', method: 'post', auth: true },
 
 
   [Endpoints.listComments]: { url: 'http://localhost/3000/comments', method: 'get' },
-  [Endpoints.createComment]: { url: 'http://localhost/3000/comment', method: 'post' },
-  [Endpoints.deleteComment]: { url: 'http://localhost/3000/:id', method: 'post' },
+  [Endpoints.createComment]: { url: 'http://localhost/3000/comment', method: 'post', auth: true },
+  [Endpoints.deleteComment]: { url: 'http://localhost/3000/:id', method: 'post', auth: true },
 
 
 }

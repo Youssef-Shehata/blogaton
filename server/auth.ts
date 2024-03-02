@@ -11,6 +11,7 @@ export const jwtSign: (obj: jwtToken) => string = (obj) => {
 
 
 export const jwtVerify: (token: string) => jwtToken = (token) => {
+
   return jwt.verify(token, getJwtSecret()) as jwtToken
 }
 

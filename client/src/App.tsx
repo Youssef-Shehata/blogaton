@@ -1,32 +1,65 @@
-import { useDebugValue, useEffect, useState } from "react";
-import { Post } from '../../shared'
-import { useQuery } from "@tanstack/react-query";
-import { listPosts } from "./client";
+import { Post } from '@blogaton/shared'
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { listPosts, likePost, dislikePost } from "./client";
 import { clsx } from 'clsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import rfdc from 'rfdc'
+import { useState } from 'react';
 
 export const App = () => {
-
-  const clone = rfdc()
+  const [flipper, setFlipper] = useState(true)
+  const queryClient = useQueryClient()
   const { data, error, isLoading } = useQuery({ queryKey: ['listposts'], queryFn: listPosts });
-  const [posts, setPosts] = useState<Post[]>([])
+
+  const { mutateAsync: likeMutation } = useMutation({
+    mutationFn: (post: Post) => likePost({
+      postId: post.id,
+      userId: "309d76d0-a2b1-4a57-8eda-5ab78731d4e9"
+    })
+    , onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['listposts'] })
+    },
+  })
+
+
+
+  const { mutateAsync: dislikeMutation } = useMutation({
+    mutationFn: (post: Post) => dislikePost({
+      postId: post.id,
+      userId: "309d76d0-a2b1-4a57-8eda-5ab78731d4e9"
+    })
+    , onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ['listposts'] })
+    },
+  })
+
   if (isLoading) return <>loading....</>
   if (error || data == undefined) return <>there was an error fetching posts ,try again later. </>
 
 
+  const likeHandler = async (post: Post) => {
+    if (flipper == false) {
+      try {
+        await likeMutation(post)
+        setFlipper(true)
+      } catch (e: any) {
+        console.log(e.message)
 
-  const likeHandler = (post: Post) => {
-    // console.log(posts)
-    let newPosts = clone(data.posts);
-    let targetIdx = newPosts?.findIndex((target) => target.id == post.id) || 100
-    // console.log(targetIdx)
-    if (!newPosts || targetIdx == -1) return
-    console.log(newPosts[targetIdx].liked);
-    data.posts = newPosts
-    // console.log(data.posts)
+      }
+    } else {
+      try {
+        await dislikeMutation(post)
+        setFlipper(false)
+      } catch (e: any) {
+        console.log(e.message)
+
+      }
+    }
+
+
   }
+
 
 
   const buttonClasses: (liked: boolean) => string = (liked) => {
@@ -51,10 +84,11 @@ export const App = () => {
       posts:
       {
         !!data?.posts && data.posts.map((post) => {
-          return <div className="Post">
+          return <div key={post.id} className="Post">
             <div>{post.title}</div>
-            <button className={buttonClasses(!!post.liked)} onClick={() => likeHandler(post)}><FontAwesomeIcon icon={faHeart} /> </button>
+            <button className={buttonClasses(!!post.liked)} onClick={async () => await likeHandler(post)}><FontAwesomeIcon icon={faHeart} /> </button>
             <button >comments</button>
+            <div >likes: {post.likes}</div>
 
 
 

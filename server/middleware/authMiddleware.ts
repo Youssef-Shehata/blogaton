@@ -14,11 +14,7 @@ export const authMiddleware: ExpressHandler<{}, {}> = async (req, res, next) => 
     const user = await db.getUserById(userId)
     if (!user) {
       throw ('user not found')
-
-
     }
-
-
 
     res.locals.userId = user.id
 

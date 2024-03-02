@@ -1,9 +1,9 @@
 import { number } from "prop-types";
-import { SignInReq, SignInRes, SignUpReq, SignUpRes } from "../../shared/src/api";
+import { SignInReq, SignInRes, SignUpReq, SignUpRes } from "../../sharedResources/src/api";
 import { jwtSign } from "../auth";
 import { db } from "../datastore";
 import { ExpressHandler } from "../types";
-import { User } from "../../shared";
+import { User } from "../../sharedResources";
 
 import crypto from 'crypto'
 
