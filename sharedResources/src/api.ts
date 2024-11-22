@@ -28,12 +28,29 @@ export type SignInRes = {
 }
 
 
+//following
 
+export type followUserReq = Pick<User  , 'id'>
+export interface followUserRes {}
+
+export type unFollowUserReq = Pick<User  , 'id'>
+export interface unFollowUserRes {}
+
+export type getFollowersReq = Pick<User , 'id'>
+export interface getFollowersRes {followers : User[]}
+
+export type getFollowingReq = Pick<User , 'id'>
+export interface getFollowingRes {following : User[]}
+
+export type getFeedReq= Pick<User , 'id'>
+export interface getFeedRes {posts: Post[]}
 //comment apis 
 export type createCommentReq = Pick<Comment, 'userId' | 'postId' | 'comment'>
 export interface createCommentRes { }
 
 
+export type listCommentsReq = Pick<Post, 'id'>
+export interface listCommentsRes{comments: Comment[] }
 
 
 

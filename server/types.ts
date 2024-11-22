@@ -5,8 +5,7 @@ export type jwtToken = {
   userName: string,
 
 }
-
-
 export type withError<T> = T & { error: string }
-
 export type ExpressHandler<req, res> = RequestHandler<string, Partial<withError<res>>, Partial<req>, any>
+
+

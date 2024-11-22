@@ -24,6 +24,7 @@ export enum Endpoints {
 
 
 export const ENDPOINT_CONFIGS: { [key in Endpoints]: EndpointConfig } = {
+
   [Endpoints.healthZ]: { url: 'http://localhost/3000/healthZ ', method: 'get' },
   [Endpoints.signin]: { url: 'http://localhost/3000/signin', method: 'post' },
   [Endpoints.signup]: { url: 'http://localhost/3000/signup', method: 'post' },
