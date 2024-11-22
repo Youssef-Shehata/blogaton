@@ -39,7 +39,7 @@ export const ENDPOINT_CONFIGS: { [key in Endpoints]: EndpointConfig } = {
 
 
   [Endpoints.listComments]: { url: 'http://localhost/3000/comments', method: 'get' },
-  [Endpoints.createComment]: { url: 'http://localhost/3000/comment', method: 'post', auth: true },
+  [Endpoints.createComment]: { url: 'http://localhost/4000/comment', method: 'post', },//add auth
   [Endpoints.deleteComment]: { url: 'http://localhost/3000/:id', method: 'post', auth: true },
 
 

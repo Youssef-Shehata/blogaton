@@ -7,6 +7,7 @@ import dotenv from 'dotenv'
 import { authMiddleware } from './middleware/authMiddleware'
 import { requestLoggerMiddleware } from './middleware/loggerMiddleware'
 import { createLikeHandler, getLikesHandler, deleteLikeHandler } from './handlers/likeHandlers'
+import { createCommentHandler } from './handlers/commentHandlers'
 
 
 
@@ -57,6 +58,8 @@ import { createLikeHandler, getLikesHandler, deleteLikeHandler } from './handler
     app.get('/likes', getLikesHandler)
     app.post('/deletelike', deleteLikeHandler)
 
+
+    app.post('/comment', createCommentHandler)
 
 
     app.use(errorHandler)

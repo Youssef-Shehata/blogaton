@@ -64,7 +64,7 @@ export const listPosts = async (req: listPostsRequest): Promise<listPostsRespons
     headers: {
       'Content-Type': 'application/json',
 
-      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Imdvam9zYXRvcnUiLCJ1c2VySWQiOiIxMmZkMGY3Yi00ZDA0LTRiNzUtODU3YS04MzM5NGQ5NmQ4ZGQiLCJpYXQiOjE3MDkyMTg5ODUsImV4cCI6MTcwOTM5MTc4NX0.WGYr8Zfnj8pmFc-nHB5NyPEtZTi_3BH4YEN3CdZoYfU',
+      'Authorization': 'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VyTmFtZSI6Imdvam9zYXRvcnUiLCJ1c2VySWQiOiIxMmZkMGY3Yi00ZDA0LTRiNzUtODU3YS04MzM5NGQ5NmQ4ZGQiLCJpYXQiOjE3MDkzMTQ0MDUsImV4cCI6MTcwOTQ4NzIwNX0.uwnXEIGheo-7UF_y-8nkCOOGE2PFo1uUXyCrbrQVQD0',
     }
   });
   if (!res.ok) {

@@ -1,16 +1,16 @@
-import { Post } from '@blogaton/shared'
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import { listPosts, likePost, dislikePost } from "./client";
 import { clsx } from 'clsx'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-solid-svg-icons';
 import rfdc from 'rfdc'
+import { Post } from '@blogaton/shared'
 import { useState } from 'react';
-
+import PostComponent from "./components/PostComponent";
 export const App = () => {
   const [flipper, setFlipper] = useState(true)
   const queryClient = useQueryClient()
-  const { data, error, isLoading } = useQuery({ queryKey: ['listposts'], queryFn: listPosts });
+  const { data, error, isLoading } = useQuery({ queryKey: ['listposts'], queryFn: listPosts, staleTime: 0 });
 
   const { mutateAsync: likeMutation } = useMutation({
     mutationFn: (post: Post) => likePost({
@@ -20,6 +20,7 @@ export const App = () => {
     , onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['listposts'] })
     },
+
   })
 
 
@@ -84,17 +85,16 @@ export const App = () => {
       posts:
       {
         !!data?.posts && data.posts.map((post) => {
-          return <div key={post.id} className="Post">
-            <div>{post.title}</div>
-            <button className={buttonClasses(!!post.liked)} onClick={async () => await likeHandler(post)}><FontAwesomeIcon icon={faHeart} /> </button>
-            <button >comments</button>
-            <div >likes: {post.likes}</div>
 
 
 
+          return (
+            <PostComponent key={post.id} post={post} />
 
 
-          </div>
+          )
+
+
 
 
 
