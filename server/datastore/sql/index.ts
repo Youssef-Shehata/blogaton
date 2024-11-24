@@ -66,7 +66,7 @@ export class sqlDataStore implements Datastore {
             fields.push('userName = ?');
             values.push(user.userName);
         }
-        if (user.email) {
+        if (user.email) {
             fields.push('email = ?');
             values.push(user.email);
         }
@@ -236,9 +236,9 @@ export class sqlDataStore implements Datastore {
     }
 
 
-    //exists(like: Like): Promise<boolean> {
-    //  throw new Error('Method not implemented.');
-    //}
+    exists(): Promise<boolean> {
+      throw new Error('Method not implemented.');
+    }
 
 
 

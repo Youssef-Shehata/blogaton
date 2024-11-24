@@ -1,4 +1,4 @@
-import express, { RequestHandler } from 'express'
+import express from 'express'
 import { createPostHandler, getFeedHandler, listPostsHandler } from './handlers/postHandlers'
 import { errorHandler } from './middleware/errorMiddleware'
 import { initDb } from './datastore'
@@ -47,12 +47,12 @@ import { followUserHandler, getFollowersHandler, getFollowingHandler, unfollowUs
         app.post('/signup', SignUpHandler)
         app.post('/signIn', SignInHandler)
 
-
-
-        app.use(authMiddleware)
         app.get('/posts', listPostsHandler)
-        app.post('/posts', createPostHandler)
+        app.get('/comments', listCommentsHandler);
 
+        //AUTHED 
+        app.use(authMiddleware)
+        app.post('/posts', createPostHandler)
 
         app.post('/addlike', createLikeHandler)
         app.get('/likes', getLikesHandler)
@@ -60,10 +60,10 @@ import { followUserHandler, getFollowersHandler, getFollowingHandler, unfollowUs
 
 
         app.post('/comments', createCommentHandler)
-        app.get('/comments',listCommentsHandler);
 
         app.post('/follow', followUserHandler);
         app.post('/unfollow', unfollowUserHandler);
+
         app.get('/followers', getFollowersHandler);
         app.get('/following', getFollowingHandler);
 
